@@ -5,7 +5,9 @@ from send_email import send_email
 
 api_key = "7b3c5cd21e2a457db2a883ab08ca391a"
 language = "en"
-url = f"https://newsapi.org/v2/everything?q=tesla&from=2024-09-15&sortBy=publishedAt&apiKey={api_key}&language={language}"
+topic = "telsa"
+
+url = f"https://newsapi.org/v2/everything?q={topic}&from=2024-09-15&sortBy=publishedAt&apiKey={api_key}&language={language}"
 
 # Make request
 request = requests.get(url)
