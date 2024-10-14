@@ -4,7 +4,8 @@ import json
 from send_email import send_email
 
 api_key = "7b3c5cd21e2a457db2a883ab08ca391a"
-url = f"https://newsapi.org/v2/everything?q=tesla&from=2024-09-12&sortBy=publishedAt&apiKey={api_key}"
+language = "en"
+url = f"https://newsapi.org/v2/everything?q=tesla&from=2024-09-15&sortBy=publishedAt&apiKey={api_key}&language={language}"
 
 # Make request
 request = requests.get(url)
@@ -12,10 +13,15 @@ request = requests.get(url)
 # Get a dictionary with data
 content = request.json()
 
+# print(content)
+
 # Treat strings to send email.
 titles_descriptions = ["Title : " + str(article["title"]) + "\n" + 
-					   "Description :" + str(article["description"]) + "\n\n" 
-					   for article in content["articles"][0:20]]
+					   "Description :" + str(article["description"]) + "\n" + 
+					   "Link :" + str(article["url"]) + "\n\n"
+					   for article in content["articles"][0:5]]
+
+# Generate a meesage to send email.
 message = "".join(titles_descriptions)
 
 # generate messages and setup to send email.
@@ -25,4 +31,3 @@ message = message
 
 # Send email
 send_email(username, subject, message)
- 
